@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.protobuf'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.captech.teegarden.captechassistant"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
+    }
+
+    signingConfigs {
+        release{
+            keyAlias 'captech'
+            keyPassword 'captech'
+            storeFile file('keys/AssistantKey.jks')
+            storePassword 'captech'
+        }
+        debug{
+            keyAlias 'captech'
+            keyPassword 'captech'
+            storeFile file('keys/AssistantKey.jks')
+            storePassword 'captech'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug{
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.2.0'
+    }
+    plugins {
+        javalite {
+            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0"
+        }
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.2.0'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                javalite {}
+                grpc {
+                    // Options added to --grpc_out
+                    option 'lite'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+
+    provided 'com.google.android.things:androidthings:0.4-devpreview'
+    compile 'edu.cmu.pocketsphinx:pocketsphinx-android:5prealpha-release@aar'
+    compile 'io.grpc:grpc-okhttp:1.2.0'
+    compile 'io.grpc:grpc-protobuf-lite:1.2.0'
+    compile 'io.grpc:grpc-stub:1.2.0'
+    compile 'io.grpc:grpc-auth:1.2.0'
+    compile('com.google.auth:google-auth-library-oauth2-http:0.6.0') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+    compile 'javax.annotation:javax.annotation-api:1.2'
+    compile 'com.google.android.things.contrib:driver-button:0.2'
+
+}
