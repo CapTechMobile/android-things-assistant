@@ -31,7 +31,7 @@ The above steps will output the credentials file required.
 Once you move past the prototyping phase, you can find details [here](https://developers.google.com/identity/protocols/OAuth2) on using OAuth 2.0 to Access Google APIs. 
 
 
-###Required Hardware
+### Required Hardware
 
 - Raspberry Pi 3 device with Android Things flashed on it
 - microphone, this project leverages this one from [Amazon](https://www.amazon.com/gp/product/B00IR8R7WQ/ref=oh_aui_detailpage_o06_s00?ie=UTF8&psc=1)
@@ -39,13 +39,13 @@ Once you move past the prototyping phase, you can find details [here](https://de
 
 ![hardware setup](demo_pic_setup.jpg)
 
-###Expected Lighting
+### Expected Lighting
 ![lighting setup](Assistant_Lights.png)
 
-###Demo
+### Demo
 [![IMAGE ALT TEXT HERE](demo_video_play.png)](https://goo.gl/photos/M82Cm7wynWDL9ppZ7)
 
-###License
+### License
 
 Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
